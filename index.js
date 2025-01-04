@@ -2,24 +2,21 @@ const express = require("express");
 const cors = require('cors');
 const path = require('path');
 
-
 const app = express();
-app.use(cors());
-// app.use(
-//   cors({
-//     origin: 'http://localhost:3000',
-//     credentials: true,
-//   })
-// );
-// app.use(
-//   cors({
-//     origin: 'http://localhost:5173',
-//     credentials: true,
-//   })
-// );
+
+// Set CORS options based on the environment
+const corsOptions = {
+  origin: process.env.NODE_ENV === 'production' 
+    ? 'https://fewd-cw.onrender.com' 
+    : 'http://localhost:3000',  
+  credentials: true,
+};
+
+app.use(cors(corsOptions));
+
 app.use(express.json());
-app.use(express.urlencoded({extended: true}));
-app.use(express.static(path.join(__dirname, 'public')))
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, 'public')));
 
 const router = require('./routes/routes');
 app.use('/', router);
