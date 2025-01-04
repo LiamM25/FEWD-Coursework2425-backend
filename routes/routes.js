@@ -5,6 +5,11 @@ const controller = require("../controllers/controllers");
 
 // router.get("/setup", controller.newList);
 
+// Wake up route
+router.get('/wakeup', (req, res) => {
+  res.send('Backend is awake!');
+});
+
 router.get("/talks", controller.listConf);
 router.get('/talks/speaker/:term', controller.listOneSpeaker);
 router.get('/talks/session/:term', controller.listSession);
