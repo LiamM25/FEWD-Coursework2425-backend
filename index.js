@@ -24,6 +24,8 @@ app.use(express.static(path.join(__dirname, 'public')))
 const router = require('./routes/routes');
 app.use('/', router);
 
-app.listen(3001, () => {
+const PORT = process.env.PORT || 3001;
+
+app.listen(PORT, () => {
   console.log("Server started on port 3001. Ctrl^c to quit.");
 });
